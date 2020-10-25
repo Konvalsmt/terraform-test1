@@ -43,7 +43,14 @@ resource "aws_instance" "main" {
   key_name="virtu"
 }
 
-
+resource "aws_internet_gateway" "gw" {
+  vpc_id = var.vpc_id
+}
+resource "aws_eip" "EIP" {
+  vpc = true
+  instance                  = aws_instance.main.id
+  depends_on                = [aws_internet_gateway.gw]
+}
 
 
 
