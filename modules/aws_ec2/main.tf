@@ -10,7 +10,7 @@ resource "aws_instance" "main" {
   ami                    = lookup(var.ami_ids, var.region)
   instance_type          = "t2.micro"
   vpc_security_group_ids = [aws_security_group.main.id]
-  name ="Pilots"
+  name =var.instance_name
   tags = {
     Name = "Pilots"
   }
@@ -80,10 +80,29 @@ resource "aws_elb" "web_elb" {
     instance_protocol = "http"
   }
 
+}resource "aws_launch_configuration" "launch" {
+  name_prefix   = "my-launch-configuration-"
+  image_id      = "ami-0f86bb438e080dd6b"
+  instance_type = "t2.micro"
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
+resource "aws_launch_configuration" aws_instance.main.name {
+  name =aws_instance.main.name
+  name_prefix   = "my-launch-configuration-"
+  image_id      = "ami-0f86bb438e080dd6b"
+  instance_type = "t2.micro"
+
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 resource "aws_autoscaling_group" "web" {
-  name = "Instan-EC2-asg"
+  name = "AUTOSCAL-ASG"
 
   min_size             = 1
   desired_capacity     = 2
