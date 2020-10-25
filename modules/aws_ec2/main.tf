@@ -30,18 +30,25 @@ resource "aws_security_group" "main" {
   }
 }
 
+resource "aws_launch_configuration" "web" {
+  name_prefix = "web-"
 
+  image_id = lookup(var.ami_ids, var.region)
+  instance_type = "t2.micro"
+  key_name="virtu"
 
-resource "aws_instance" "main" {
-  ami                    = lookup(var.ami_ids, var.region)
-  instance_type          = "t2.micro"
-  security_groups=["allow_http"]
-  vpc_security_group_ids = [aws_security_group.main.id]
+  security_groups =[aws_security_group.main.id]
+  associate_public_ip_address = true
   tags = {
     Name = var.instance_name
   }
-  key_name="virtu"
+
+  lifecycle {
+    create_before_destroy = true
+  }
 }
+
+
 
 resource "aws_internet_gateway" "gw" {
   vpc_id = var.vpc_id
