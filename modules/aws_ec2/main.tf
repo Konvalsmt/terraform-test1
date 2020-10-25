@@ -55,7 +55,7 @@ resource "aws_internet_gateway" "gw" {
 }
 resource "aws_eip" "EIP" {
   vpc = true
-  instance                  = aws_instance.main.id
+  instance                  = aws_launch_configuration.web.id
   depends_on                = [aws_internet_gateway.gw]
 }
 
