@@ -82,7 +82,7 @@ resource "aws_elb" "web_elb" {
 
 }
 
-resource "aws_launch_configuration" aws_instance.main.name {
+resource "aws_launch_configuration" "${aws_instance.main.name}" {
   name =aws_instance.main.name
   name_prefix   = "my-launch-configuration-"
   image_id      = "ami-0f86bb438e080dd6b"
