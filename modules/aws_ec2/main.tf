@@ -22,28 +22,6 @@ resource "aws_eip" "main" {
 }
 
 
-
-resource "aws_security_group_rule" "out" {
-  from_port         = 0
-  to_port           = 0
-  protocol          = "-1"
-  security_group_id = aws_security_group.main.id
-  cidr_blocks       = ["0.0.0.0/0"]
-  type              = "egress"
-}
-
-resource "aws_security_group_rule" "in" {
-  for_each          = toset(var.ports_to_open)
-  to_port           = each.value
-  from_port         = each.value
-  protocol          = "tcp"
-  security_group_id = aws_security_group.main.id
-  cidr_blocks       = ["0.0.0.0/0"]
-  type              = "ingress"
-}
-
-
-
 resource "aws_security_group" "elb_http" {
   name        = "elb_http"
   description = "Allow HTTP traffic to instances through Elastic Load Balancer"
@@ -116,7 +94,7 @@ resource "aws_autoscaling_group" "web" {
     aws_elb.web_elb.id
   ]
 
-# launch_configuration = aws_launch_configuration.web.name
+launch_configuration = aws_instance.main.name
 
   enabled_metrics = [
     "GroupMinSize",
@@ -129,8 +107,8 @@ resource "aws_autoscaling_group" "web" {
   metrics_granularity = "1Minute"
 
   vpc_zone_identifier  = [
-    aws_subnet.public_us_east_1a.id,
-    aws_subnet.public_us_east_1b.id
+    "${module.aws_vpc.public_us_east_1a",
+    "${module.aws_vpc.public_us_east_1b}"
   ]
 
   # Required to redeploy without an outage.
