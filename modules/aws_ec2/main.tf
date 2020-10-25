@@ -82,7 +82,7 @@ resource "aws_elb" "web_elb" {
 
 }
 
-resource "aws_launch_configuration" "${aws_instance.main.name}" {
+resource "aws_launch_configuration" "ilaunch" {
   name =aws_instance.main.name
   name_prefix   = "my-launch-configuration-"
   image_id      = "ami-0f86bb438e080dd6b"
@@ -105,7 +105,7 @@ resource "aws_autoscaling_group" "web" {
     aws_elb.web_elb.id
   ]
 
-launch_configuration = aws_instance.main.name
+launch_configuration = aws_launch_configuration.ilaunch.name
 
   enabled_metrics = [
     "GroupMinSize",
