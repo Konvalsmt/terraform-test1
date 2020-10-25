@@ -171,7 +171,7 @@ resource "aws_elb" "web_elb" {
 }
 
 resource "aws_launch_configuration" "launch" {
-  name   = "my-launch-configuration-"
+  name_prefix   = "my-launch-configuration-"
   image_id      = "ami-0f86bb438e080dd6b"
   instance_type = "t2.micro"
 
