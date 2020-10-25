@@ -20,6 +20,7 @@ module "aws_ec2" {
   vpc_id="${module.aws_vpc.my_vpc_id}" 
   public_1="${module.aws_vpc.public_us_east_1a_id}"
   public_2="${module.aws_vpc.public_us_east_1b_id}"
+  subnet_id="${module.aws_vpc.subnet_id}"
   igw="${module.aws_vpc.int_igw}"
   region="${var.region}" 
   source = "./modules/aws_ec2"
