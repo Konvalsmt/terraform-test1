@@ -3,6 +3,9 @@ variable "region" {
      default = "us-east-1"
 }
 
+variable "igw" {
+}
+
 variable "public_1" {
      type=string
      default = ""
