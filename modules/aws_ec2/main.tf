@@ -118,7 +118,7 @@ launch_configuration = aws_launch_configuration.ilaunch.name
   metrics_granularity = "1Minute"
 
   vpc_zone_identifier  = [
-    "${module.aws_vpc.public_us_east_1a",
+    "${module.aws_vpc.public_us_east_1a}",
     "${module.aws_vpc.public_us_east_1b}"
   ]
 
