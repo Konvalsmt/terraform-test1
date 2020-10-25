@@ -39,9 +39,7 @@ resource "aws_launch_configuration" "web" {
 
   security_groups =[aws_security_group.main.id]
   associate_public_ip_address = true
-  tags = {
-    Name = var.instance_name
-  }
+  
 
   lifecycle {
     create_before_destroy = true
