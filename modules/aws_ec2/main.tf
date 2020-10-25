@@ -48,13 +48,11 @@ resource "aws_launch_configuration" "web" {
 
 
 
-resource "aws_internet_gateway" "gw" {
-  vpc_id = var.vpc_id
-}
+
 resource "aws_eip" "EIP" {
   vpc = true
   instance                  = aws_launch_configuration.web.id
-  depends_on                = [aws_internet_gateway.gw]
+  depends_on                = [var.igw]
 }
 
 
