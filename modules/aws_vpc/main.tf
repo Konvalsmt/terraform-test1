@@ -1,5 +1,5 @@
 resource "aws_vpc" "my_vpc" {
-  cidr_block       = "${var.cidr}"
+  cidr_block       = var.cidr
   enable_dns_hostnames = true
 
   tags = {
@@ -9,8 +9,8 @@ resource "aws_vpc" "my_vpc" {
 
 resource "aws_subnet" "public1" {
   vpc_id     = aws_vpc.my_vpc.id
-  cidr_block = "${public_subnets[0]}"
-  availability_zone = "${azs[0]}"
+  cidr_block = var.public_subnets[0]
+  availability_zone = var.azs[0]
 
   tags = {
     Name = "Public Subnet1"
@@ -19,8 +19,8 @@ resource "aws_subnet" "public1" {
 
 resource "aws_subnet" "public2" {
   vpc_id     = aws_vpc.my_vpc.id
-  cidr_block = "${public_subnets[1]}"
-  availability_zone = "${azs[1]}"
+  cidr_block = var.public_subnets[1]
+  availability_zone = var.azs[1]
 
   tags = {
     Name = "Public Subnet2"
@@ -29,8 +29,8 @@ resource "aws_subnet" "public2" {
 
 resource "aws_subnet" "private1" {
   vpc_id     = aws_vpc.my_vpc.id
-  cidr_block = "${private_subnets[0]}"
-  availability_zone = "${azs[0]}"
+  cidr_block = var.private_subnets[0]
+  availability_zone = var.azs[0]
 
   tags = {
     Name = "Private Subnet1"
@@ -39,8 +39,8 @@ resource "aws_subnet" "private1" {
 
 resource "aws_subnet" "private2" {
   vpc_id     = aws_vpc.my_vpc.id
-  cidr_block = "${private_subnets[1]}"
-  availability_zone = "${azs[1]}"
+  cidr_block = var.private_subnets[1]
+  availability_zone = var.azs[1]
 
   tags = {
     Name = "Private Subnet2"
@@ -182,7 +182,7 @@ resource "aws_autoscaling_group" "web" {
     aws_elb.web_elb.id
   ]
 
-#launch_configuration = aws_launch_configuration.web.name
+launch_configuration = "aws_ec2_my" #aws_launch_configuration.web.nawsame
 
   enabled_metrics = [
     "GroupMinSize",
