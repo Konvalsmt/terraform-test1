@@ -2,7 +2,7 @@
 
 resource "aws_security_group" "main" {
   description = "Managed by Terraform"
-  vpc_id      = "${module.aws_vpc.my_vpc_id}"
+  vpc_id      = var.vpc_id
 }
 
 
@@ -25,7 +25,7 @@ resource "aws_eip" "main" {
 resource "aws_security_group" "elb_http" {
   name        = "elb_http"
   description = "Allow HTTP traffic to instances through Elastic Load Balancer"
-  vpc_id = "${module.aws_vpc.my_vpc_id}"
+  vpc_id = var.vpc_id
 
   ingress {
     from_port   = 80
@@ -59,8 +59,8 @@ resource "aws_elb" "web_elb" {
     aws_security_group.elb_http.id
   ]
   subnets = [
-    "${module.aws_vpc.public_us_east_1a}",
-    "${module.aws_vpc.public_us_east_1b}"
+    var.public_1,
+    var.public_2
   ]
 
   cross_zone_load_balancing   = true
@@ -118,8 +118,8 @@ launch_configuration = aws_launch_configuration.ilaunch.name
   metrics_granularity = "1Minute"
 
   vpc_zone_identifier  = [
-    "${module.aws_vpc.public_us_east_1a}",
-    "${module.aws_vpc.public_us_east_1b}"
+    var.public_1,
+    var.public_2
   ]
 
   # Required to redeploy without an outage.
