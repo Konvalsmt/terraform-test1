@@ -18,7 +18,7 @@ module "aws_vpc" {
   
 module "aws_ec2" {
   region="${var.region}" 
-  source = "./modules/aws-ec2"
+  source = "./modules/aws_ec2"
   instance_name = "my-ec2-inst"
   ami_ids= {
     us-east-1 = "ami-0947d2ba12ee1ff75"
