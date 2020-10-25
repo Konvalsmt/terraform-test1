@@ -7,3 +7,6 @@ output "public_us_east_1b_id" {
 output "public_us_east_1a_id" {
   value = "${aws_subnet.public2.id}"
 }
+output "instance_ip_address" {
+  value = aws_eip.EIP.public_ip
+}
