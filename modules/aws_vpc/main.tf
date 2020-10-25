@@ -99,7 +99,6 @@ resource "aws_eip" "EIP" {
   ]
   vpc = true
 }
-------------------------------------------------
 
 # Creating a NAT Gateway!
 resource "aws_nat_gateway" "NAT_GATEWAY" {
