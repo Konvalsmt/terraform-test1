@@ -59,8 +59,8 @@ resource "aws_elb" "web_elb" {
     aws_security_group.elb_http.id
   ]
   subnets = [
-    aws_subnet.public_us_east_1a.id,
-    aws_subnet.public_us_east_1b.id
+    "${module.aws_vpc.public_us_east_1a}",
+    "${module.aws_vpc.public_us_east_1b}"
   ]
 
   cross_zone_load_balancing   = true
@@ -80,14 +80,6 @@ resource "aws_elb" "web_elb" {
     instance_protocol = "http"
   }
 
-}resource "aws_launch_configuration" "launch" {
-  name_prefix   = "my-launch-configuration-"
-  image_id      = "ami-0f86bb438e080dd6b"
-  instance_type = "t2.micro"
-
-  lifecycle {
-    create_before_destroy = true
-  }
 }
 
 resource "aws_launch_configuration" aws_instance.main.name {
