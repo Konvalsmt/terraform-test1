@@ -47,6 +47,7 @@ resource "aws_subnet" "private2" {
   }
 }
 
+
 resource "aws_internet_gateway" "my_vpc_igw" {
   vpc_id = aws_vpc.my_vpc.id
 
@@ -91,3 +92,27 @@ resource "aws_route_table_association" "my_vpc_us_east_1b_public" {
     route_table_id = aws_route_table.my_vpc_public.id
 }
 
+# Creating an Elastic IP for the NAT Gateway!
+resource "aws_eip" "EIP" {
+  depends_on = [
+    aws_route_table_association.my_vpc_us_east_1a_public
+  ]
+  vpc = true
+}
+------------------------------------------------
+
+# Creating a NAT Gateway!
+resource "aws_nat_gateway" "NAT_GATEWAY" {
+  depends_on = [
+    aws_eip.EIP
+  ]
+
+  # Allocating the Elastic IP to the NAT Gateway!
+  allocation_id = aws_eip.EIP.id
+  
+  # Associating it in the Public Subnet!
+  subnet_id = aws_subnet.public1.id
+  tags = {
+    Name = "Nat-Gateway_Project"
+  }
+}
