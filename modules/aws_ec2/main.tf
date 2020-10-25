@@ -43,9 +43,7 @@ resource "aws_instance" "main" {
   key_name="virtu"
 }
 
-resource "aws_eip" "main" {
-  instance = aws_instance.main.id
-}
+
 
 
 
