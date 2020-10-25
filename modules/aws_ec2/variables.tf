@@ -8,6 +8,10 @@ variable "instance_name"  {
      default = "my-ec2-inst"
 }
 
+variable "vpc_id"  {
+     type=string
+     default = ""
+}
 variable "ami_ids"  {
      type=map
      default = {
