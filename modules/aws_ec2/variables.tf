@@ -6,6 +6,9 @@ variable "region" {
 variable "igw" {
 }
 
+variable "subnet_id" {
+}
+
 variable "public_1" {
      type=string
      default = ""
