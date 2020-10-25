@@ -10,9 +10,8 @@ resource "aws_instance" "main" {
   ami                    = lookup(var.ami_ids, var.region)
   instance_type          = "t2.micro"
   vpc_security_group_ids = [aws_security_group.main.id]
-  name =var.instance_name
   tags = {
-    Name = "Pilots"
+    Name = var.instance_name
   }
   key_name="virtu"
 }
