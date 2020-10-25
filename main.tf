@@ -17,6 +17,7 @@ module "aws_vpc" {
 }
   
 module "aws_ec2" {
+  vpc_id="${module.aws_vpc.my_vpc_id}" 
   region="${var.region}" 
   source = "./modules/aws_ec2"
   instance_name = "my-ec2-inst"
