@@ -18,6 +18,8 @@ module "aws_vpc" {
   
 module "aws_ec2" {
   vpc_id="${module.aws_vpc.my_vpc_id}" 
+  public_1="${module.aws_vpc.public_us_east_1a_id}"
+  public_2="${module.aws_vpc.public_us_east_1b_id}"
   region="${var.region}" 
   source = "./modules/aws_ec2"
   instance_name = "my-ec2-inst"
