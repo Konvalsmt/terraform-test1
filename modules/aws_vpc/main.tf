@@ -170,6 +170,16 @@ resource "aws_elb" "web_elb" {
 
 }
 
+resource "aws_launch_configuration" "launch" {
+  name   = "my-launch-configuration-"
+  image_id      = "ami-0f86bb438e080dd6b"
+  instance_type = "t2.micro"
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
 resource "aws_autoscaling_group" "web" {
   name = "AUTOSCAL-ASG"
 
@@ -182,7 +192,7 @@ resource "aws_autoscaling_group" "web" {
     aws_elb.web_elb.id
   ]
 
-launch_configuration = "aws_ec2_my" #aws_launch_configuration.web.nawsame
+launch_configuration = "aws_launch_configuration.launch.name"
 
   enabled_metrics = [
     "GroupMinSize",
