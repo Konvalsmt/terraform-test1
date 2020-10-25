@@ -15,3 +15,15 @@ module "aws_vpc" {
   public_subnets  = ["10.0.101.0/24", "10.0.102.0/24", "10.0.103.0/24"]
 
 }
+  
+module "aws_ec2" {
+  region="${var.region}" 
+  source = "./modules/aws-ec2"
+  instance_name = "my-ec2-inst"
+  ami_ids= {
+    us-east-1 = "ami-0947d2ba12ee1ff75"
+    us-east-2 = "ami-03657b56516ab7912"
+    eu-west-1 = "ami-0bb3fad3c0286ebd5"
+  }
+  type_inst ="t2.micro"
+}
