@@ -47,11 +47,20 @@ resource "aws_launch_configuration" "web" {
 }
 
 
+resource "aws_instance" "main" {
+  ami                    = lookup(var.ami_ids, var.region)
+  instance_type          = "t2.micro"
+  vpc_security_group_ids = [aws_security_group.main.id]
+  tags = {
+    Name = "Pilots"
+  }
+  key_name="virtu"
+}
 
 
 resource "aws_eip" "EIP" {
   vpc = true
-  instance                  = aws_launch_configuration.web.id
+  instance                  = aws_instance.main.id
   depends_on                = [var.igw]
 }
 
