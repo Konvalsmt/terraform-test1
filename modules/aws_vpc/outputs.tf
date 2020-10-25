@@ -9,5 +9,5 @@ output "public_us_east_1a_id" {
 }
 
 output "int_igw" {
-value = "${aws_internet_gateway.my_vpc_igw}"
+value = "${aws_internet_gateway.my_vpc_igw.id}"
   }
