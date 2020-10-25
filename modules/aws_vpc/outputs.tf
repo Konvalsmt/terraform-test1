@@ -8,3 +8,6 @@ output "public_us_east_1a_id" {
   value = "${aws_subnet.public2.id}"
 }
 
+output "int_igw" {
+value = "${aws_internet_gateway.my_vpc_igw}"
+  }
