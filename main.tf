@@ -26,8 +26,8 @@ module "aws_ec2" {
   source = "./modules/aws_ec2"
   instance_name = "my-ec2-inst"
   ami_ids= {
-    us-east-1 = "ami-094d9cd7536bcef21"
-    us-east-2 = "ami-05dd4412da54fe14c"
+    us-east-1 = "ami-0914bc04e5495b889"
+    us-east-2 = "ami-03b4f7f2a94c30c3d"
     eu-west-1 = "ami-0bb3fad3c0286ebd5"
   }
   type_inst ="t2.micro"
