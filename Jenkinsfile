@@ -65,6 +65,7 @@ pipeline {
                                     sh "terraform init "
                                     sh "terraform apply -auto-approve "
                                    sh "terraform output > terr-out "
+                                sh "terraform destroy -auto-approve "
                                             sh " python3 invent.py"
                                             sh "cat inventory"  
                                     
