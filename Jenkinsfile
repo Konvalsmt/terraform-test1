@@ -62,7 +62,9 @@ pipeline {
                             }
                             steps {
                                           
-
+                                    sh "terraform init "
+                                    sh "terraform apply -auto-approve "
+                                   sh "terraform output > terr-out "
                                             sh " python3 invent.py"
                                             sh "cat inventory"  
                                     
