@@ -19,6 +19,9 @@ with(open('envparam1','w+')) as f:
 pt='"'	
 with(open('envparam2','w+')) as f:
 	f.write(pt+k[1].strip()+pt )
+	f.close()
+with(open('envparam3.properties','w+')) as f:
+	f.write(par+"="+k[1].strip())
 	f.close()	
 
 
