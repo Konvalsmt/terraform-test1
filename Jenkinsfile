@@ -50,7 +50,7 @@ pipeline {
                                // script {
                                 // Mark the stage and build results as failure on error but continue pipeline execution
                                 //catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
-                                   sh "ansible-playbook -b -i ./ansible/inventory -e AGE=100 --private-key $PATH_TO_KEY ./ansible/docker.yml"
+                                   sh "ansible-playbook -b -i ./ansible/inventory -e AGE=${env.BUILD_NUMBER} --private-key $PATH_TO_KEY ./ansible/docker.yml"
                                 //}
                             }
                         }
