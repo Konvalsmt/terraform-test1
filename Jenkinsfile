@@ -76,6 +76,8 @@ pipeline {
                                     sh  "cp Dockerfile  ~/Public/Dockerfile"
                                     sh "eval \$(python3 -c 'import os; f=open(\"envparam1\",\"r+\"); p=f.readline();f.close() ;  print(p)') "
                                     sh  "cp terraform.tfstate  ~/Public/terraform.tfstate"
+                                    def props = readProperties file: 'envparam3'
+                                    env.instance_ip_address = props.instance_ip_address 
                                     //def ls="cat envparam2".execute().text
                                     //env.instance_ip_address=ls
                                     //echo "${ls}"
