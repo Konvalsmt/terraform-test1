@@ -74,7 +74,17 @@ resource "aws_autoscaling_group" "my_asg" {
   vpc_zone_identifier  = [var.public_1, var.public_2]
   min_size             = 1
   max_size             = 2
+  
+  enabled_metrics = [
+    "GroupMinSize",
+    "GroupMaxSize",
+    "GroupDesiredCapacity",
+    "GroupInServiceInstances",
+    "GroupTotalInstances"
+  ]
 
+  metrics_granularity = "1Minute"
+  
   lifecycle {
     create_before_destroy = true
   }
