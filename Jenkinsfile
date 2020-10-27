@@ -1,19 +1,19 @@
 stageResultMap = [:]
-
+stageResultMap1 = [:]
 pipeline {
     agent any
-    parameters {
-        choice(
-            choices: ['greeting' , 'silence'],
-            description: '',
-            name: 'REQUESTED_ACTION')
-    }
+
  
     stages {
         
         stage('A') {
             steps {
-                println("This is stage: ${STAGE_NAME}")
+                  try {
+                        sh "mkdir -p ~/Public"
+                       }
+                         catch (Exception e) {
+                                        stageResultMap.didB1Succeed = false                                        
+                                    }
             }
         }
         
@@ -23,9 +23,7 @@ pipeline {
                                     // Catch exceptions, set the stage result as unstable,
                                     // build result as failure, and the variable didB1Succeed to false
                                     try {
-                                        sh "pwd"
-                                        sh "pwd -P"
-                                        sh "cp ../inventory /ansible-itea/inventory"
+                                        sh "cp ~/Public/inentory /ansible-itea/inventory"
                                         
                                         stageResultMap.didB1Succeed = true
                                     }
@@ -65,9 +63,11 @@ pipeline {
                                     sh "terraform init "
                                     sh "terraform apply -auto-approve "
                                    sh "terraform output > terr-out "
-                                sh "terraform destroy -auto-approve "
+                                   sh "terraform destroy -auto-approve "
                                             sh " python3 invent.py"
                                             sh "cat inventory"  
+                                     sh  "cp inventory ~/Public/inventory"
+                                     
                                     
 
                             }
