@@ -39,7 +39,7 @@ pipeline {
                             }
                         }
         
-                stage('Rebuild Docker image and  ansible run') {
+                stage('Rebuild NEW Docker image and  ansible run') {
                             // Execute only if B1 succeeded
                             when {
                                 expression {
