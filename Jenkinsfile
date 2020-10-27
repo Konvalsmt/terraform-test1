@@ -63,7 +63,7 @@ pipeline {
                             steps {
                                           
 
-                                            sh " python invent.py"
+                                            sh " python3 invent.py"
                                             sh "cat inventory"  
                                     
 
