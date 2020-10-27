@@ -75,15 +75,7 @@ resource "aws_autoscaling_group" "my_asg" {
   min_size             = 1
   max_size             = 2
   
-  enabled_metrics = [
-    "GroupMinSize",
-    "GroupMaxSize",
-    "GroupDesiredCapacity",
-    "GroupInServiceInstances",
-    "GroupTotalInstances"
-  ]
 
-  metrics_granularity = "1Minute"
   
   lifecycle {
     create_before_destroy = true
