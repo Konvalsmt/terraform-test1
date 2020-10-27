@@ -44,7 +44,7 @@ pipeline {
                                 }
                             }
                             steps {
-                               // script {
+                                script {
                                 // Mark the stage and build results as failure on error but continue pipeline execution
                                 //catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
                                    sh  "cp index.html ~/Public/index.html"
@@ -55,7 +55,7 @@ pipeline {
                                     env.instance_ip_address = props.instance_ip_address              
                                    sh " printenv "
                                    sh "ansible-playbook -b -i ./ansible/inventory -e AGE=${env.BUILD_NUMBER} --private-key $PATH_TO_KEY ./ansible/docker.yml"
-                                //}
+                                }
                             }
                         }
             
