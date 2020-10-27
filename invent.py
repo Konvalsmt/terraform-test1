@@ -16,9 +16,9 @@ param='export instance_ip_address="x.x.x.x"'
 with(open('envparam1','w+')) as f:
 	f.write(param.replace('x.x.x.x',k[1].strip() ))
 	f.close()
-	
+pt='"'	
 with(open('envparam2','w+')) as f:
-	f.write(k[1].strip() )
+	f.write(pt+k[1].strip()+pt )
 	f.close()	
 
 
