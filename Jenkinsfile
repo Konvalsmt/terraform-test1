@@ -39,7 +39,7 @@ pipeline {
                             }
                         }
         
-                stage('Docker apply ansible') {
+                stage('Rebuild Docker image and  ansible run') {
                             // Execute only if B1 succeeded
                             when {
                                 expression {
@@ -50,6 +50,7 @@ pipeline {
                                // script {
                                 // Mark the stage and build results as failure on error but continue pipeline execution
                                 //catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
+                                   sh  "cp index.html ~/Public/index.html"
                                    sh "ansible-playbook -b -i ./ansible/inventory -e AGE=${env.BUILD_NUMBER} --private-key $PATH_TO_KEY ./ansible/docker.yml"
                                 //}
                             }
