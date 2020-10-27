@@ -72,7 +72,7 @@ pipeline {
                                      sh  "cp inventory ~/Public/inventory" 
                                   sh  "cp index.html ~/Public/index.html"
                                   sh  "cp Dockerfile  ~/Public/Dockerfile"
-                                  sh "eval \$(python3 -c 'import os; f=open('envparam1','r+'); p=f.readline();f.close() ; c='export ';z =c+ p; print(z)')"
+                                  sh "eval \$(python3 -c 'import os; f=open(\"envparam1\",\"r+\"); p=f.readline();f.close() ; c=\"export \";z =c+p; print(z)') "
 
                             }
                         }
