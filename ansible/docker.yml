@@ -1,1 +1,53 @@
-1
+# Ansible playbook AWS - install docker
+---
+- name: "AWS - Install docker"
+  hosts: all
+  gather_facts: no
+  become: yes
+  tasks:
+
+
+ 
+    - name: Install docker-ce (centos) via amazon-linux-extras packages
+      yum:
+        name: "docker"
+        state: latest
+
+    - name: Enable Docker CE service at startup
+      service:
+        name: docker
+        state: started
+        enabled: yes
+
+
+    - name: docker  extras repository
+      shell: docker ps
+  
+    - name: copy build
+      copy:
+        src: ~/Public/Dockerfile
+        dest: /home/ec2-user/Dockerfile
+        owner: ec2-user
+        group: ec2-user
+
+    - name: copy build
+      copy:
+        src: ~/Public/index.html
+        dest: /home/ec2-user/index.html
+        owner: ec2-user
+        group: ec2-user
+
+
+    - name: build image
+      command: chdir=/home/ec2-user docker build -t web:v2 .
+
+    - name: Check if docker exist
+      shell: "docker run hello-world"
+      changed_when: False
+      register: cmd_output
+
+    - name: docker  stop
+      shell: docker stop $(docker ps -a -q)
+ 
+    - name: docker  run
+      shell: docker run -d -p 80:80 -e NAME={{NAME}} -e AGE={{AGE}}  web:v2
