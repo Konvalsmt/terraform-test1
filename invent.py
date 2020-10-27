@@ -28,5 +28,6 @@ ansible_ssh_extra_args		= '-o StrictHostKeyChecking=no'
 '''
 
 with(open('inventory','w+')) as f:
-	f.write(invent.replace('x.x.x.x',trim(k[1]) ))
+	f.write(invent.replace('x.x.x.x',k[1].strip() ))
 	f.close()
+
