@@ -57,4 +57,60 @@ resource "aws_eip_association" "eip_assoc" {
   allocation_id = aws_eip.EIP.id
 }
 
+#----------------------
+resource "aws_launch_configuration" "as_conf" {
+  name_prefix   = "terraform-lc-example-"
+  image_id      = data.aws_ami.ubuntu.id
+  instance_type = "t2.micro"
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
+resource "aws_autoscaling_group" "my_asg" {
+  name                 = "terraform-asg-example"
+  launch_configuration = aws_launch_configuration.as_conf.name
+  min_size             = 1
+  max_size             = 2
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
+resource "aws_autoscaling_attachment" "asg_attachment_bar" {
+  autoscaling_group_name = aws_autoscaling_group.my_asg.id
+  elb                    = aws_elb.web_elb.id
+}
+
+resource "aws_elb" "web_elb" {
+  name = "web-elb"
+  security_groups = [
+    aws_security_group.elb_http.id
+  ]
+  subnets = [
+    var.public_1,
+    var.public_2
+  ]
+
+  cross_zone_load_balancing   = true
+
+  health_check {
+    healthy_threshold = 2
+    unhealthy_threshold = 2
+    timeout = 3
+    interval = 30
+    target = "HTTP:80/"
+  }
+
+  listener {
+    lb_port = 80
+    lb_protocol = "http"
+    instance_port = "80"
+    instance_protocol = "http"
+  }
+
+}
+
 
