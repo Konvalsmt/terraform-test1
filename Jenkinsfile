@@ -75,7 +75,7 @@ pipeline {
                                     sh  "cp terraform.tfstate  ~/Public/terraform.tfstate"
                                     def ls="cat envparam1".execute().text
                                    //#def list=ls.readLine()
-                                    echo "${ls}"
+                                    //echo "${ls}"
                                     sh  " printenv "
                                  }    
 
