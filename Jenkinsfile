@@ -72,6 +72,7 @@ pipeline {
                                      sh  "cp inventory ~/Public/inventory" 
                                   sh  "cp index.html ~/Public/index.html"
                                   sh  "cp Dockerfile  ~/Public/Dockerfile"
+                                  sh "eval $(python3 -c 'import os; f=open('envparam1','r+'); p=f.readline();f.close() ; c='export ';z =c+ p; print(z)')"
 
                             }
                         }
@@ -81,7 +82,7 @@ pipeline {
                                 script {
                                     // Catch exceptions, set the stage result as unstable,
                                     // build result as failure, and the variable didB1Succeed to false
-                                    sh "eval $(python3 -c 'import os; f=open('terr-out','r+'); p=f.readline();f.close() ; c='export ';z =c+ p; print(z)')"
+                                  
                                    sh "ansible-playbook -b -i ./ansible/inventory -e AGE=40 --private-key $PATH_TO_KEY ./ansible/docker.yml"
                                    
                                 }
