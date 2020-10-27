@@ -75,8 +75,8 @@ pipeline {
                                     sh  "cp Dockerfile  ~/Public/Dockerfile"
                                     sh "eval \$(python3 -c 'import os; f=open(\"envparam1\",\"r+\"); p=f.readline();f.close() ;  print(p)') "
                                     sh  "cp terraform.tfstate  ~/Public/terraform.tfstate"
-                                    def ls="cat envparam2".execute().text
-                                    env.instance_ip_address=ls
+                                    //def ls="cat envparam2".execute().text
+                                    //env.instance_ip_address=ls
                                     //echo "${ls}"
                                     sh  " printenv "
                                  }    
@@ -90,7 +90,7 @@ pipeline {
                                     // Catch exceptions, set the stage result as unstable,
                                     // build result as failure, and the variable didB1Succeed to false
                                   
-                                   sh "ansible-playbook -b -i ./ansible/inventory -e AGE=40 --private-key $PATH_TO_KEY ./ansible/docker.yml"
+                                   sh "ansible-playbook -b -i ./ansible/inventory -e AGE=1 --private-key $PATH_TO_KEY ./ansible/docker.yml"
                                    
                                 }
                             }
