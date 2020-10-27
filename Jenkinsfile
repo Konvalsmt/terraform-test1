@@ -70,8 +70,8 @@ pipeline {
                                      sh "cat inventory"  
                                     sh  "cp inventory ./ansible/inventory"
                                      sh  "cp inventory ~/Public/inventory"
-                                  sh "cd ansible"
-                                  sh "ansible-playbook -b -i inventory --private-key $PATH_TO_KEY ./ansible/docker.yml"
+                                  
+                                  sh "ansible-playbook -b -i ./ansible/ --private-key $PATH_TO_KEY ./ansible/docker.yml"
                                    sh "terraform destroy -auto-approve "
 
                                      
