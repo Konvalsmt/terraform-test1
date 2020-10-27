@@ -87,7 +87,7 @@ resource "aws_autoscaling_attachment" "asg_attachment_bar" {
 resource "aws_elb" "web_elb" {
   name = "web-elb"
   security_groups = [
-    aws_security_group.elb_http.id
+    aws_security_group.main.id
   ]
   subnets = [
     var.public_1,
