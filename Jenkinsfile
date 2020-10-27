@@ -63,7 +63,6 @@ pipeline {
                             steps {
                                    sh "export AWS_PROFILE=default"
                                     sh   "aws ec2  describe-instances --profile default"
-                                     sh   "aws ec2  describe-instances --profile default"
                                     sh " terraform init"
                                        sh " terraform apply -auto-approve "
                                           sh " terraform output > terr-out"
