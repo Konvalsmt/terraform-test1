@@ -6,6 +6,7 @@
   become: yes
   vars:
     NAME:  "{{ lookup('env','instance_ip_address') }}"
+    TAG:   "{{ lookup('env','BUILD_TAG') }}"
   tasks:
 
 
@@ -52,4 +53,4 @@
       shell: docker stop $(docker ps -a -q)
  
     - name: docker  run
-      shell: docker run -d -p 80:80 -e NAME={{NAME}} -e AGE={{AGE}}  web:v2
+      shell: docker run -d -p 80:80 -e NAME={{TAG}} -e AGE={{AGE}}  web:v2
