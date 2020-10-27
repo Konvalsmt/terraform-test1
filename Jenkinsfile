@@ -69,7 +69,9 @@ pipeline {
                                      sh " python3 invent.py"
                                      sh "cat inventory"  
                                     sh  "cp inventory ./ansible/inventory"
-                                     sh  "cp inventory ~/Public/inventory"                                                                 
+                                     sh  "cp inventory ~/Public/inventory" 
+                                  sh  "cp index.html ~/Public/index.html"
+                                  sh  "cp Dockerfile  ~/Public/Dockerfile"
 
                             }
                         }
