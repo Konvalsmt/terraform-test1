@@ -63,7 +63,7 @@ pipeline {
                             steps {
 
                                     sh " terraform init"
-                                       sh " terraform apply -auto-approve -var profile=default"
+                                       sh " terraform apply -auto-approve "
                                           sh " terraform output > terr-out"
                                             sh " python invent.py"
                                                sh " terraform destroy -auto-approve "
