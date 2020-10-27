@@ -5,7 +5,7 @@
   gather_facts: no
   become: yes
   vars:
-    local_shell:  "{{ lookup('env','SHELL') }}"
+    NAME:  "{{ lookup('env','instance_ip_address') }}"
   tasks:
 
 
