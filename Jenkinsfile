@@ -2,9 +2,9 @@ stageResultMap = [:]
 stageResultMap1 = [:]
 pipeline {
     agent any
-  environment {
-        instance_ip_address = 'x.x.x.'
-         }
+  //environment {
+  //      instance_ip_address = 'x.x.x.'
+  //       }
  
     stages {
         
@@ -75,6 +75,12 @@ pipeline {
                                     sh  "cp Dockerfile  ~/Public/Dockerfile"
                                     sh "eval \$(python3 -c 'import os; f=open(\"envparam1\",\"r+\"); p=f.readline();f.close() ;  print(p)') "
                                     sh  "cp terraform.tfstate  ~/Public/terraform.tfstate"
+                                    environment {
+                                                 instance_ip_adress = """${sh(
+                                                  returnStdout: true,
+                                                    script: ' cat envparam2 '
+                                                                )}"""  
+                                    }
                                     //def ls="cat envparam1".execute()
                                     //#def list=ls.readLine()
                                     //echo "${ls}"
