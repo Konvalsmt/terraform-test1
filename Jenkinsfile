@@ -25,7 +25,7 @@ pipeline {
                                     // Catch exceptions, set the stage result as unstable,
                                     // build result as failure, and the variable didB1Succeed to false
                                     try {
-                                        sh "cp ~/Public/inentory /ansible-itea/inventory"
+                                        sh "cp ~/Public/inentory ./ansible/inventory"
                                         
                                         stageResultMap.didB1Succeed = true
                                     }
@@ -48,7 +48,7 @@ pipeline {
                                // script {
                                 // Mark the stage and build results as failure on error but continue pipeline execution
                                 //catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
-                                    sh "echo Ansible"
+                                   sh "ansible-playbook -b -i ./ansible/inventory --private-key $PATH_TO_KEY ./ansible/docker.yml"
                                 //}
                             }
                         }
@@ -69,16 +69,23 @@ pipeline {
                                      sh " python3 invent.py"
                                      sh "cat inventory"  
                                     sh  "cp inventory ./ansible/inventory"
-                                     sh  "cp inventory ~/Public/inventory"
-                                  
-                                  sh "ansible-playbook -b -i ./ansible/ --private-key $PATH_TO_KEY ./ansible/docker.yml"
-                                   sh "terraform destroy -auto-approve "
-
-                                     
-                                    
+                                     sh  "cp inventory ~/Public/inventory"                                                                 
 
                             }
                         }
+        
+              stage('Run Docker with ansible') {
+                            steps {
+                                script {
+                                    // Catch exceptions, set the stage result as unstable,
+                                    // build result as failure, and the variable didB1Succeed to false
+                                   sh "ansible-playbook -b -i ./ansible/inventory --private-key $PATH_TO_KEY ./ansible/docker.yml"
+                                   
+                                }
+                            }
+                        } 
+        
+        
     }                  
                         
 }
