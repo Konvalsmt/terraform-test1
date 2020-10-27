@@ -90,13 +90,7 @@ resource "aws_autoscaling_group" "my_asg" {
   }
 }
 
-resource "aws_autoscaling_policy" "web_policy_up" {
-  name = "web_policy_up"
-  scaling_adjustment = 1
-  adjustment_type = "ChangeInCapacity"
-  cooldown = 300
-  autoscaling_group_name = aws_autoscaling_group.my_asg.id
-}
+
 
 resource "aws_autoscaling_attachment" "asg_attachment_bar" {
   autoscaling_group_name = aws_autoscaling_group.my_asg.id
