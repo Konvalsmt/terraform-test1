@@ -71,11 +71,11 @@ pipeline {
                                     sh  "cp inventory ~/Public/inventory" 
                                     sh  "cp index.html ~/Public/index.html"
                                     sh  "cp Dockerfile  ~/Public/Dockerfile"
-                                    sh "eval \$(python3 -c 'import os; f=open(\"envparam1\",\"r+\"); p=f.readline();f.close() ; c=\"export \";z =c+p; print(z)') "
+                                    sh "eval \$(python3 -c 'import os; f=open(\"envparam1\",\"r+\"); p=f.readline();f.close() ;  print(p)') "
                                     sh  "cp terraform.tfstate  ~/Public/terraform.tfstate"
                                     def ls="cat envparam1".execute().text
-                                    def list=ls.readLine()
-                                    sh  " echo $list "
+                                   //#def list=ls.readLine()
+                                    echo "${ls}"
                                     sh  " printenv "
                                  }    
 
