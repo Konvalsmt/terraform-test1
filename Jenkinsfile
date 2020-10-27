@@ -65,10 +65,15 @@ pipeline {
                                     sh "terraform init "
                                     sh "terraform apply -auto-approve "
                                    sh "terraform output > terr-out "
-                                   sh "terraform destroy -auto-approve "
-                                            sh " python3 invent.py"
-                                            sh "cat inventory"  
+                                    sleep(10,'SECONDS')
+                                     sh " python3 invent.py"
+                                     sh "cat inventory"  
+                                    sh  "cp inventory ./ansible/inventory"
                                      sh  "cp inventory ~/Public/inventory"
+                                  sh "cd ansible"
+                                  sh "ansible-playbook -b -i inventory --private-key $PATH_TO_KEY docker.yml"
+                                   sh "terraform destroy -auto-approve "
+
                                      
                                     
 
