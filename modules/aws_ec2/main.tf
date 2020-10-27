@@ -60,7 +60,7 @@ resource "aws_eip_association" "eip_assoc" {
 #----------------------
 resource "aws_launch_configuration" "as_conf" {
   name_prefix   = "terraform-lc-example-"
-  image_id      = data.aws_ami.ubuntu.id
+  image_id      = "ami-06fc179f04400d5ec"
   instance_type = "t2.micro"
 
   lifecycle {
