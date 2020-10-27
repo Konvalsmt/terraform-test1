@@ -4,6 +4,8 @@
   hosts: all
   gather_facts: no
   become: yes
+  vars:
+    local_shell:  "{{ lookup('env','SHELL') }}"
   tasks:
 
 
