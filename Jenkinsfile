@@ -48,7 +48,7 @@ pipeline {
                                // script {
                                 // Mark the stage and build results as failure on error but continue pipeline execution
                                 //catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
-                                   sh "ansible-playbook -b -i ./ansible/inventory --private-key $PATH_TO_KEY ./ansible/docker.yml"
+                                   sh "ansible-playbook -b -i ./ansible/inventory -e AGE=100 --private-key $PATH_TO_KEY ./ansible/docker.yml"
                                 //}
                             }
                         }
@@ -81,7 +81,8 @@ pipeline {
                                 script {
                                     // Catch exceptions, set the stage result as unstable,
                                     // build result as failure, and the variable didB1Succeed to false
-                                   sh "ansible-playbook -b -i ./ansible/inventory --private-key $PATH_TO_KEY ./ansible/docker.yml"
+                                    sh "eval $(python3 -c 'import os; f=open('terr-out','r+'); p=f.readline();f.close() ; c='export ';z =c+ p; print(z)')"
+                                   sh "ansible-playbook -b -i ./ansible/inventory -e AGE=40 --private-key $PATH_TO_KEY ./ansible/docker.yml"
                                    
                                 }
                             }
