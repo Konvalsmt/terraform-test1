@@ -65,7 +65,7 @@ pipeline {
                                     sh "terraform init "
                                     sh "terraform apply -auto-approve "
                                    sh "terraform output > terr-out "
-                                    sleep(10,'SECONDS')
+                                    
                                      sh " python3 invent.py"
                                      sh "cat inventory"  
                                     sh  "cp inventory ./ansible/inventory"
