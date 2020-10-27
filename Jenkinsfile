@@ -25,7 +25,7 @@ pipeline {
                                     // Catch exceptions, set the stage result as unstable,
                                     // build result as failure, and the variable didB1Succeed to false
                                     try {
-                                        sh "cp ~/Public/inentory ./ansible/inventory"
+                                        sh "cp ~/Public/inventory ./ansible/inventory"
                                         
                                         stageResultMap.didB1Succeed = true
                                     }
