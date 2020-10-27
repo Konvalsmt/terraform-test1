@@ -8,12 +8,14 @@ pipeline {
         
         stage('A') {
             steps {
+                script {
                   try {
                         sh "mkdir -p ~/Public"
                        }
                          catch (Exception e) {
-                                        stageResultMap.didB1Succeed = false                                        
+                                        stageResultMap1.didB1Succeed = false                                        
                                     }
+                }      
             }
         }
         
