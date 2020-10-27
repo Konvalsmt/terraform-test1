@@ -12,9 +12,13 @@ for line in Lines:
 
     
 
-#a="ss=p100"
-#k=list(a.split('='))
-#print(k[1])
+param='export instance_ip_address="x.x.x.x"'
+with(open('envparam1','w+')) as f:
+	f.write(param.replace('x.x.x.x',k[1].strip() ))
+	f.close()
+
+
+
 invent='''
 [amzl]
 x.x.x.x	 ansible_user=ec2-user
