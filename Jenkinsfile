@@ -61,7 +61,7 @@ pipeline {
                                 }
                             }
                             steps {
-                                          
+                                 script {    
                                     sh "terraform init "
                                     sh "terraform apply -auto-approve "
                                     sh "terraform output > terr-out "
@@ -77,6 +77,7 @@ pipeline {
                                     def list=ls.readLine()
                                     sh  " echo $list "
                                     sh  " printenv "
+                                 }    
 
                             }
                         }
