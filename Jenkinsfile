@@ -73,7 +73,7 @@ pipeline {
                                     sh  "cp Dockerfile  ~/Public/Dockerfile"
                                     sh "eval \$(python3 -c 'import os; f=open(\"envparam1\",\"r+\"); p=f.readline();f.close() ;  print(p)') "
                                     sh  "cp terraform.tfstate  ~/Public/terraform.tfstate"
-                                    def ls="cat envparam1".execute().text
+                                    def ls="cat envparam1".execute()
                                    //#def list=ls.readLine()
                                     //echo "${ls}"
                                     sh  " printenv "
