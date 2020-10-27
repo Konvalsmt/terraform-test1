@@ -2,13 +2,10 @@ stageResultMap = [:]
 stageResultMap1 = [:]
 pipeline {
     agent any
-  environment {
-        instance_ip_address = "x.x.x.x"
-         }
- 
+
     stages {
         
-        stage('A') {
+        stage('Begin Project') {
             steps {
                 script {
                   try {
@@ -51,6 +48,12 @@ pipeline {
                                 // Mark the stage and build results as failure on error but continue pipeline execution
                                 //catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
                                    sh  "cp index.html ~/Public/index.html"
+                                    environment {
+                                               instance_ip_address = "x.x.x.x"
+                                    } 
+                                    def props = readProperties file: 'envparam3.properties'
+                                    env.instance_ip_address = props.instance_ip_address              
+                                   sh " printenv "
                                    sh "ansible-playbook -b -i ./ansible/inventory -e AGE=${env.BUILD_NUMBER} --private-key $PATH_TO_KEY ./ansible/docker.yml"
                                 //}
                             }
@@ -76,6 +79,9 @@ pipeline {
                                     sh  "cp Dockerfile  ~/Public/Dockerfile"
                                     sh "eval \$(python3 -c 'import os; f=open(\"envparam1\",\"r+\"); p=f.readline();f.close() ;  print(p)') "
                                     sh  "cp terraform.tfstate  ~/Public/terraform.tfstate"
+                                    environment {
+                                               instance_ip_address = "x.x.x.x"
+                                    } 
                                     def props = readProperties file: 'envparam3.properties'
                                     env.instance_ip_address = props.instance_ip_address 
                                     //def ls="cat envparam2".execute().text
