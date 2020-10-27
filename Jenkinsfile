@@ -62,12 +62,9 @@ pipeline {
                             }
                             steps {
                                           
-                                    sh " cat ~/.aws/config"
-                                    sh " terraform init"
-                                       sh " terraform apply -auto-approve "
-                                          sh " terraform output > terr-out"
+
                                             sh " python invent.py"
-                                               sh " terraform destroy -auto-approve "
+                                            sh "cat inventory"  
                                     
 
                             }
