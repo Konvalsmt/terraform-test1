@@ -23,7 +23,7 @@ x.x.x.x	 ansible_user=ec2-user
 amzl
 
 [linux:vars]
-ansible_ssh_private_key_file	= "~/itea-hub.pem"
+ansible_ssh_private_key_file	= "~/.ssh/id_rsa"
 ansible_ssh_extra_args		= '-o StrictHostKeyChecking=no'
 '''
 
