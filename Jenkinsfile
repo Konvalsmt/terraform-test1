@@ -2,7 +2,9 @@ stageResultMap = [:]
 stageResultMap1 = [:]
 pipeline {
     agent any
-
+  environment {
+        instance_ip_address = 'x.x.x.'
+         }
  
     stages {
         
