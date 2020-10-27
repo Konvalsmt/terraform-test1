@@ -62,7 +62,7 @@ pipeline {
                             }
                             steps {
                                           
-     
+                                    sh " cat ~/.aws/config"
                                     sh " terraform init"
                                        sh " terraform apply -auto-approve "
                                           sh " terraform output > terr-out"
