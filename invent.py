@@ -17,7 +17,7 @@ for line in Lines:
 #print(k[1])
 invent='''
 [amzl]
-x.x.x.x		ansible_user=ec2-user
+x.x.x.x	 ansible_user=ec2-user
 
 [linux:children]
 amzl
@@ -28,6 +28,5 @@ ansible_ssh_extra_args		= '-o StrictHostKeyChecking=no'
 '''
 
 with(open('inventory','w+')) as f:
-	f.write(invent.replace('x.x.x.x',k[1]))
+	f.write(invent.replace('x.x.x.x',trim(k[1]) ))
 	f.close()
-
