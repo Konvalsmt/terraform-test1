@@ -61,6 +61,7 @@ pipeline {
                                 }
                             }
                             steps {
+                                 sh "cat ~/.aws/config"
                                    sh "export AWS_PROFILE=default"
                                     sh   "aws ec2  describe-instances --profile default"
                                     sh " terraform init"
